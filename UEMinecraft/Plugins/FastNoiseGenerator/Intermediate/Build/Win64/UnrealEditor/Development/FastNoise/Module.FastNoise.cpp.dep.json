@@ -1,0 +1,20 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\ue\\projects\\ue5-petproject-minecraft\\ueminecraft\\plugins\\fastnoisegenerator\\intermediate\\build\\win64\\unrealeditor\\development\\fastnoise\\module.fastnoise.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\ue\\projects\\ue5-petproject-minecraft\\ueminecraft\\intermediate\\build\\win64\\ueminecrafteditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\ue\\projects\\ue5-petproject-minecraft\\ueminecraft\\plugins\\fastnoisegenerator\\intermediate\\build\\win64\\unrealeditor\\development\\fastnoise\\definitions.fastnoise.h",
+            "c:\\ue\\projects\\ue5-petproject-minecraft\\ueminecraft\\plugins\\fastnoisegenerator\\source\\thirdparty\\fastnoise\\private\\fastnoise.cpp",
+            "c:\\ue\\projects\\ue5-petproject-minecraft\\ueminecraft\\plugins\\fastnoisegenerator\\source\\thirdparty\\fastnoise\\public\\fastnoise.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.19041.0\\ucrt\\math.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.19041.0\\ucrt\\assert.h",
+            "c:\\program files (x86)\\microsoft visual studio\\2019\\community\\vc\\tools\\msvc\\14.29.30133\\include\\random",
+            "c:\\ue\\projects\\ue5-petproject-minecraft\\ueminecraft\\plugins\\fastnoisegenerator\\source\\thirdparty\\fastnoise\\private\\fastnoisemodule.cpp",
+            "c:\\ue\\projects\\ue5-petproject-minecraft\\ueminecraft\\plugins\\fastnoisegenerator\\source\\thirdparty\\fastnoise\\public\\fastnoisemodule.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

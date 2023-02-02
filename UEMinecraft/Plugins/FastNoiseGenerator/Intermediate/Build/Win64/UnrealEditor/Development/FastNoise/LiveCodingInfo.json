@@ -1,0 +1,9 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.FastNoise.cpp.obj": [
+			"FastNoise.cpp.obj",
+			"FastNoiseModule.cpp.obj"
+		]
+	}
+}

@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-FastNoiseGenerator.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\UE\Projects\UE5-Petproject-Minecraft\UEMinecraft\Intermediate\Build\Win64\UEMinecraftEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\UE\Projects\UE5-Petproject-Minecraft\UEMinecraft\Plugins\FastNoiseGenerator\Intermediate\Build\Win64\UnrealEditor\Development\FastNoiseGenerator\Module.FastNoiseGenerator.cpp.obj"
+"C:\UE\Projects\UE5-Petproject-Minecraft\UEMinecraft\Plugins\FastNoiseGenerator\Intermediate\Build\Win64\UnrealEditor\Development\FastNoiseGenerator\Default.rc2.res"
+/OUT:"C:\UE\Projects\UE5-Petproject-Minecraft\UEMinecraft\Plugins\FastNoiseGenerator\Intermediate\Build\Win64\UnrealEditor\Development\FastNoiseGenerator\UnrealEditor-FastNoiseGenerator.lib"

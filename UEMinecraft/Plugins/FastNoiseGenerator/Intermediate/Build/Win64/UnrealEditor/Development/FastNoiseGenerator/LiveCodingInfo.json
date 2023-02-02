@@ -1,0 +1,11 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.FastNoiseGenerator.cpp.obj": [
+			"FastNoiseGenerator.init.gen.cpp.obj",
+			"FastNoiseWrapper.gen.cpp.obj",
+			"FastNoiseGenerator.cpp.obj",
+			"FastNoiseWrapper.cpp.obj"
+		]
+	}
+}
