@@ -23,7 +23,7 @@ public:
 	AChunkBase();
 
 	UPROPERTY(EditDefaultsOnly, Category="Chunk")
-	int Size = 64;
+	FIntVector Size = FIntVector(32, 32, 32);
 	
 	TObjectPtr<UMaterialInterface> Material;
 	float Frequency;

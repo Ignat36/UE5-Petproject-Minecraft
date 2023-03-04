@@ -8,21 +8,21 @@
 void AGreedyChunk::Setup()
 {
 	// Initialize Blocks
-	Blocks.SetNum(Size * Size * Size);
+	Blocks.SetNum(Size.X * Size.Y * Size.Z);
 }
 
 void AGreedyChunk::Generate2DHeightMap(const FVector Position)
 {
-	for (int x = 0; x < Size; x++)
+	for (int x = 0; x < Size.X; x++)
 	{
-		for (int y = 0; y < Size; y++)
+		for (int y = 0; y < Size.Y; y++)
 		{
 			const float Xpos = x + Position.X;
 			const float Ypos = y + Position.Y;
 
-			const int Height = FMath::Clamp(FMath::RoundToInt((Noise->GetNoise(Xpos, Ypos) + 1) * Size / 2), 0, Size);
+			const int Height = FMath::Clamp(FMath::RoundToInt((Noise->GetNoise(Xpos, Ypos) + 1) * Size.Z / 2), 0, Size.Z);
 
-			for (int z = 0; z < Size; z++)
+			for (int z = 0; z < Size.Z; z++)
 			{
 				if (z < Height - 3) Blocks[GetBlockIndex(x, y, z)] = EBlock::Stone;
 				else if (z < Height - 1) Blocks[GetBlockIndex(x, y, z)] = EBlock::Dirt;
@@ -35,11 +35,11 @@ void AGreedyChunk::Generate2DHeightMap(const FVector Position)
 
 void AGreedyChunk::Generate3DHeightMap(const FVector Position)
 {
-	for (int x = 0; x < Size; ++x)
+	for (int x = 0; x < Size.X; ++x)
 	{
-		for (int y = 0; y < Size; ++y)
+		for (int y = 0; y < Size.Y; ++y)
 		{
-			for (int z = 0; z < Size; ++z)
+			for (int z = 0; z < Size.Z; ++z)
 			{
 				const auto NoiseValue = Noise->GetNoise(x + Position.X, y + Position.Y, z + Position.Z);
 
@@ -58,6 +58,7 @@ void AGreedyChunk::Generate3DHeightMap(const FVector Position)
 
 void AGreedyChunk::GenerateMesh()
 {
+	TArray<int32> SizeArray = {Size.X, Size.Y, Size.Z};
 	// Sweep over each axis (X, Y, Z)
 	for (int Axis = 0; Axis < 3; ++Axis)
 	{
@@ -65,9 +66,9 @@ void AGreedyChunk::GenerateMesh()
 		const int Axis1 = (Axis + 1) % 3;
 		const int Axis2 = (Axis + 2) % 3;
 
-		const int MainAxisLimit = Size;
-		const int Axis1Limit = Size;
-		const int Axis2Limit = Size;
+		const int MainAxisLimit = SizeArray[Axis];
+		const int Axis1Limit = SizeArray[Axis1];
+		const int Axis2Limit = SizeArray[Axis2];
 
 		auto DeltaAxis1 = FIntVector::ZeroValue;
 		auto DeltaAxis2 = FIntVector::ZeroValue;
@@ -258,12 +259,12 @@ void AGreedyChunk::ModifyVoxelData(const FIntVector Position, const EBlock Block
 
 int AGreedyChunk::GetBlockIndex(const int X, const int Y, const int Z) const
 {
-	return Z * Size * Size + Y * Size + X;
+	return Z * Size.Y * Size.X + Y * Size.X + X;
 }
 
 EBlock AGreedyChunk::GetBlock(const FIntVector Index) const
 {
-	if (Index.X >= Size || Index.Y >= Size || Index.Z >= Size || Index.X < 0 || Index.Y < 0 || Index.Z < 0)
+	if (Index.X >= Size.X || Index.Y >= Size.Y || Index.Z >= Size.Z || Index.X < 0 || Index.Y < 0 || Index.Z < 0)
 		return EBlock::Air;
 	return Blocks[GetBlockIndex(Index.X, Index.Y, Index.Z)];
 }
@@ -279,6 +280,7 @@ int AGreedyChunk::GetTextureIndex(const EBlock Block, const FVector Normal) cons
 	case EBlock::Grass:
 		{
 			if (Normal == FVector::UpVector) return 0;
+			if (Normal == FVector::DownVector) return 2;
 			return 1;
 		}
 	case EBlock::Dirt: return 2;

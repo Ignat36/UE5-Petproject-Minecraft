@@ -27,7 +27,7 @@ public:
 	TObjectPtr<UMaterialInterface> Material;
 	
 	UPROPERTY(EditInstanceOnly, Category="Chunk")
-	int Size = 32;
+	FIntVector Size = FIntVector(32, 32, 32);
 
 	UPROPERTY(EditInstanceOnly, Category="Height Map")
 	EGenerationType GenerationType;

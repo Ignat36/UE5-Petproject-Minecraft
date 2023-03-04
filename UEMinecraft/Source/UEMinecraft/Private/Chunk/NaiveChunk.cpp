@@ -8,26 +8,26 @@
 void ANaiveChunk::Setup()
 {
 	// Initialize Blocks
-	Blocks.SetNum(Size * Size * Size);
+	Blocks.SetNum(Size.X * Size.Y * Size.Z);
 }
 
 void ANaiveChunk::Generate2DHeightMap(const FVector Position)
 {
-	for (int x = 0; x < Size; x++)
+	for (int x = 0; x < Size.X; x++)
 	{
-		for (int y = 0; y < Size; y++)
+		for (int y = 0; y < Size.Y; y++)
 		{
 			const float Xpos = x + Position.X;
 			const float ypos = y + Position.Y;
 			
-			const int Height = FMath::Clamp(FMath::RoundToInt((Noise->GetNoise(Xpos, ypos) + 1) * Size / 2), 0, Size);
+			const int Height = FMath::Clamp(FMath::RoundToInt((Noise->GetNoise(Xpos, ypos) + 1) * Size.Z / 2), 0, Size.Z);
 
 			for (int z = 0; z < Height; z++)
 			{
 				Blocks[GetBlockIndex(x,y,z)] = EBlock::Stone;
 			}
 
-			for (int z = Height; z < Size; z++)
+			for (int z = Height; z < Size.Z; z++)
 			{
 				Blocks[GetBlockIndex(x,y,z)] = EBlock::Air;
 			}
@@ -38,11 +38,11 @@ void ANaiveChunk::Generate2DHeightMap(const FVector Position)
 
 void ANaiveChunk::Generate3DHeightMap(const FVector Position)
 {
-	for (int x = 0; x < Size; ++x)
+	for (int x = 0; x < Size.X; ++x)
 	{
-		for (int y = 0; y < Size; ++y)
+		for (int y = 0; y < Size.Y; ++y)
 		{
-			for (int z = 0; z < Size; ++z)
+			for (int z = 0; z < Size.Z; ++z)
 			{
 				const auto NoiseValue = Noise->GetNoise(x + Position.X, y + Position.Y, z + Position.Z);
 
@@ -61,11 +61,11 @@ void ANaiveChunk::Generate3DHeightMap(const FVector Position)
 
 void ANaiveChunk::GenerateMesh()
 {
-	for (int x = 0; x < Size; x++)
+	for (int x = 0; x < Size.X; ++x)
 	{
-		for (int y = 0; y < Size; y++)
+		for (int y = 0; y < Size.Y; ++y)
 		{
-			for (int z = 0; z < Size; z++)
+			for (int z = 0; z < Size.Z; ++z)
 			{
 				if (Blocks[GetBlockIndex(x,y,z)] != EBlock::Air)
 				{
@@ -86,8 +86,8 @@ void ANaiveChunk::GenerateMesh()
 
 bool ANaiveChunk::Check(const FVector Position) const
 {
-	if (Position.X >= Size || Position.Y >= Size || Position.X < 0 || Position.Y < 0 || Position.Z < 0) return true;
-	if (Position.Z >= Size) return true;
+	if (Position.X >= Size.X || Position.Y >= Size.Y || Position.X < 0 || Position.Y < 0 || Position.Z < 0) return true;
+	if (Position.Z >= Size.Z) return true;
 	return Blocks[GetBlockIndex(Position.X, Position.Y, Position.Z)] == EBlock::Air;
 }
 
@@ -154,6 +154,6 @@ void ANaiveChunk::ModifyVoxelData(const FIntVector Position, const EBlock Block)
 
 int ANaiveChunk::GetBlockIndex(const int X, const int Y, const int Z) const
 {
-	return Z * Size * Size + Y * Size + X;
+	return Z * Size.Y * Size.X + Y * Size.X + X;
 }
 

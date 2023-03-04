@@ -43,7 +43,7 @@ void AChunkWorld::Generate3DWorld()
 			{
 				auto transform = FTransform(
 					FRotator::ZeroRotator,
-					FVector(x * Size * 100, y * Size * 100, z * Size * 100),
+					FVector(x * Size.X * 100, y * Size.Y * 100, z * Size.Z * 100),
 					FVector::OneVector
 				);
 
@@ -74,7 +74,7 @@ void AChunkWorld::Generate2DWorld()
 		{
 			auto transform = FTransform(
 				FRotator::ZeroRotator,
-				FVector(x * Size * 100, y * Size * 100, 0),
+				FVector(x * Size.X * 100, y * Size.Y * 100, 0),
 				FVector::OneVector
 			);
 
